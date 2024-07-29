@@ -1,0 +1,52 @@
+<div class="grand" style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+  <div class="parent container p-5" style="max-width: 400px; width: 100%;">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email address</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+               formControlName="email">
+        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1"
+               formControlName="password" (focus)="onFocus()" (blur)="onBlur()">
+      </div>
+
+      <div class="text-red-400 text-sm passwordValid" *ngIf="loginForm.get('password')?.dirty">
+        <span class="block">
+          <i class="fa-solid fa-square-check" *ngIf="loginForm.get('password')?.value?.match('^(?=.*[A-Z])')" style="color: #63E6BE;"></i>
+          <i class="fa-solid fa-circle-xmark" *ngIf="!loginForm.get('password')?.value?.match('^(?=.*[A-Z])')" style="color: #ff0a0a;"></i>
+          At least one uppercase letter.
+        </span>
+        <span class="block">
+          <i class="fa-solid fa-square-check" *ngIf="loginForm.get('password')?.value?.match('(?=.*[a-z])')" style="color: #63E6BE;"></i>
+          <i class="fa-solid fa-circle-xmark" *ngIf="!loginForm.get('password')?.value?.match('(?=.*[a-z])')" style="color: #ff0a0a;"></i>
+          At least one lowercase letter.
+        </span>
+        <span class="block">
+          <i class="fa-solid fa-square-check" *ngIf="loginForm.get('password')?.value?.match('(.*[0-9].*)')" style="color: #63E6BE;"></i>
+          <i class="fa-solid fa-circle-xmark" *ngIf="!loginForm.get('password')?.value?.match('(.*[0-9].*)')" style="color: #ff0a0a;"></i>
+          At least one digit.
+        </span>
+        <span class="block">
+          <i class="fa-solid fa-square-check" *ngIf="loginForm.get('password')?.value?.match('(?=.*[!@#$%^&*])')" style="color: #63E6BE;"></i>
+          <i class="fa-solid fa-circle-xmark" *ngIf="!loginForm.get('password')?.value?.match('(?=.*[!@#$%^&*])')" style="color: #ff0a0a;"></i>
+          At least one special character.
+        </span>
+        <span class="block">
+          <i class="fa-solid fa-square-check" *ngIf="loginForm.get('password')?.value?.match('.{8,}')" style="color: #63E6BE;"></i>
+          <i class="fa-solid fa-circle-xmark" *ngIf="!loginForm.get('password')?.value?.match('.{8,}')" style="color: #ff0a0a;"></i>
+          At least 8 characters long.
+        </span>
+      </div>
+
+      <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+      </div>
+      <button [disabled]="loginForm.invalid" type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>
